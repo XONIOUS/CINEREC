@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 15% 8%;
+    --foreground: 40 20% 92%;
+
+    --card: 220 12% 12%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 220 12% 12%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 38 90% 55%;
+    --primary-foreground: 220 15% 8%;
+
+    --secondary: 220 10% 18%;
+    --secondary-foreground: 40 20% 85%;
+
+    --muted: 220 10% 16%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 38 70% 45%;
+    --accent-foreground: 40 20% 92%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 10% 20%;
+    --input: 220 10% 20%;
+    --ring: 38 90% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 12% 10%;
+    --sidebar-foreground: 40 20% 85%;
+    --sidebar-primary: 38 90% 55%;
+    --sidebar-primary-foreground: 220 15% 8%;
+    --sidebar-accent: 220 10% 16%;
+    --sidebar-accent-foreground: 40 20% 85%;
+    --sidebar-border: 220 10% 18%;
+    --sidebar-ring: 38 90% 55%;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --gradient-gold: linear-gradient(135deg, hsl(38 90% 55%), hsl(28 85% 45%));
+    --gradient-card: linear-gradient(180deg, hsl(220 12% 14%), hsl(220 12% 10%));
+    --shadow-glow: 0 0 30px -5px hsl(38 90% 55% / 0.15);
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
