@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wand2, Star, RotateCcw, Clock, Film } from "lucide-react";
-import { movies, GENRES, Movie } from "@/data/movies";
+import { GENRES, Movie } from "@/data/movies";
 
-const GenreRecommender = () => {
+interface GenreRecommenderProps {
+  movies: Movie[];
+}
+
+const GenreRecommender = ({ movies }: GenreRecommenderProps) => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<Movie | null>(null);
   const [isRevealing, setIsRevealing] = useState(false);
@@ -25,6 +29,7 @@ const GenreRecommender = () => {
       );
     }
     if (pool.length === 0) pool = movies;
+    if (pool.length === 0) return; // still loading
 
     // Pick a random one, avoid repeating the same
     const filtered = recommendation

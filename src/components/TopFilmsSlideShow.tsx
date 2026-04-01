@@ -9,6 +9,8 @@ interface TopFilmsSlideShowProps {
 
 const TopFilmsSlideShow = ({ movies }: TopFilmsSlideShowProps) => {
   const topFilms = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 5);
+
+  // ALL hooks must be declared before any conditional returns (Rules of Hooks)
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -24,6 +26,21 @@ const TopFilmsSlideShow = ({ movies }: TopFilmsSlideShowProps) => {
     const timer = setInterval(() => go(1), 5000);
     return () => clearInterval(timer);
   }, [go]);
+
+  // Safe to early-return AFTER all hooks are declared
+  if (topFilms.length === 0) {
+    return (
+      <section className="container mb-14">
+        <div className="flex items-center gap-3 mb-6">
+          <TrendingUp className="w-5 h-5 text-primary" />
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
+            Top Films This Month
+          </h2>
+        </div>
+        <div className="rounded-xl border border-border bg-card aspect-[21/9] sm:aspect-[3/1] animate-pulse" />
+      </section>
+    );
+  }
 
   const film = topFilms[current];
 

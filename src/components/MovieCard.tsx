@@ -2,18 +2,21 @@ import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Star, Heart, Play } from "lucide-react";
 import { Movie } from "@/data/movies";
+import { useMoviePoster } from "@/hooks/useMovies";
 
 interface MovieCardProps {
   movie: Movie;
   index: number;
   isLiked: boolean;
-  onLike: (id: number) => void;
+  onLike: (id: string) => void;
   onClick: (movie: Movie) => void;
 }
 
 const MovieCard = ({ movie, index, isLiked, onLike, onClick }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { data: fetchedPoster } = useMoviePoster(movie.id);
+  const posterUrl = fetchedPoster ?? movie.poster;
 
   const handleMouseEnter = () => {
     timeoutRef.current = setTimeout(() => setIsHovered(true), 150);
@@ -74,7 +77,7 @@ const MovieCard = ({ movie, index, isLiked, onLike, onClick }: MovieCardProps) =
         >
           {/* Poster (default) */}
           <img
-            src={movie.poster}
+            src={posterUrl}
             alt={movie.title}
             className="w-full h-full object-cover transition-all duration-500"
             style={{
@@ -90,7 +93,7 @@ const MovieCard = ({ movie, index, isLiked, onLike, onClick }: MovieCardProps) =
             style={{ opacity: isHovered ? 1 : 0 }}
           >
             <img
-              src={movie.backdrop}
+              src={posterUrl}
               alt=""
               className="w-full h-full object-cover"
               style={{
